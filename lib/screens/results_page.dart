@@ -1,14 +1,13 @@
-import 'package:bmi_calculator/calculator_brain.dart';
-import 'package:bmi_calculator/components/bottom_button.dart';
-import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/components/reusable_card.dart';
+import 'package:bmi_calc/calculator_brain.dart';
+import 'package:bmi_calc/screens/input_screen.dart';
+import 'package:bmi_calc/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ResultsPage extends StatelessWidget {
   ResultsPage({required this.bmiBrain});
 
-  BmiBrain bmiBrain;
+  CalculatorBrain bmiBrain;
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +21,28 @@ class ResultsPage extends StatelessWidget {
         children: [
           Expanded(
               child: Container(
-            child: Center(
-                child: Text(
-              "Your Result",
-              style: ktitleTextStyle,
-            )),
-          )),
+                child: Center(
+                    child: Text(
+                      "Your Result",
+                      style: ktitleTextStyle,
+                    )),
+              )),
           Expanded(
             flex: 5,
             child: ReusableCard(
-              onPress: () {},
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    bmiBrain.getResult(),
+                    bmiBrain.bmiResult(),
                     style: kresultTextStyle,
                   ),
                   Text(
-                    bmiBrain.getBmi(),
+                    bmiBrain.bmiResultText(),
                     style: kbmiTextStyle,
                   ),
                   Text(
-                    bmiBrain.getInterpretation(),
+                    bmiBrain.bmiDescription(),
                     style: kbodyTextStyle,
                     textAlign: TextAlign.center,
                   ),
@@ -52,9 +50,17 @@ class ResultsPage extends StatelessWidget {
               ),
             ),
           ),
-          BottomButton(title: "RECALCULATE", onTap: (){
-            Navigator.pop(context);
-          })
+          Container(
+            height: 60,
+            width: double.infinity,
+            color: kbottomContainerColour,
+            child: Center(
+              child: Text(
+                "CALCULATE",
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+            ),
+          )
         ],
       ),
     );
